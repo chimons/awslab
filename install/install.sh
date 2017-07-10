@@ -11,10 +11,13 @@ find /var/www -type d -exec sudo chmod 2775 {} +
 find /var/www -type f -exec sudo chmod 0664 {} +
 cd /var/www/html
 wget https://github.com/chimons/awslab/archive/master.zip
-unzip master.zip
+unzip -q master.zip
 mv awslab-master/* .
 rm master.zip
 rm -R awslab-master/ install/
 printf '\033[0;32m  Installation of the AWS LAB environment completed\e[m\n';
 printf '\033[0;32m  Now, please update the index.php file with your actual S3 Bucket name and region.\e[m\n';
 printf '\033[0;32m  You will also need to provide your API Gateway URL in apigatewayclient.js\e[m\n';
+printf '\033[0;32m Then you will be able to access your application thru your browser at : \033[1;32m';
+curl -s http://169.254.169.254/latest/meta-data/public-hostname
+printf '\e[m\n\n'
