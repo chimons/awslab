@@ -12,3 +12,8 @@ cd /var/www/html
 wget https://github.com/chimons/awslab/archive/master.zip
 unzip master.zip
 mv awslab-master/* .
+rm master.zip
+rm -R awslab-master/ install/
+echo "Installation of the AWS LAB environment completed";
+echo "Now, please update the index.php file with your actual S3 Bucket name and region.";
+echo "You will also need to provide your API Gateway URL in apigatewayclient.js";
