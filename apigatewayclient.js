@@ -1,3 +1,7 @@
+var api_url = "http://amazon-api-gateway-url.com/update-me!";
+
+
+
 function getAjax(url, success) {
     var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     xhr.open('GET', url);
@@ -8,7 +12,7 @@ function getAjax(url, success) {
     return xhr;
 }
 
-getAjax('https://<API_GATEWAY_URL>', function(data){ 
+getAjax(api_url, function(data){ 
 
 for (var i = 0;i<data.length;i++){
 	var div = document.createElement('div');
@@ -24,3 +28,4 @@ for (var i = 0;i<data.length;i++){
 	document.body.appendChild(div);
 }
 });
+document.getElementById("apigwurl").innerHTML = api_url;
