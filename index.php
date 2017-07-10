@@ -2,8 +2,8 @@
 /**********************************/
 /* Provide your S3 Bucket name and region below */
 
-$bucket = '<BUCKET_NAME>';
-$s3region = '<S3_REGION>'; // 'eu-west-1'
+$bucket = 'BUCKET_NAME';
+$s3region = 'S3_REGION'; // 'eu-west-1'
 
 /**********************************/
 
