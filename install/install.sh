@@ -14,6 +14,6 @@ unzip master.zip
 mv awslab-master/* .
 rm master.zip
 rm -R awslab-master/ install/
-echo "Installation of the AWS LAB environment completed";
-echo "Now, please update the index.php file with your actual S3 Bucket name and region.";
-echo "You will also need to provide your API Gateway URL in apigatewayclient.js";
+printf '\033[0;32m  Installation of the AWS LAB environment completed\e[m\n';
+printf '\033[0;32m  Now, please update the index.php file with your actual S3 Bucket name and region.\e[m\n';
+printf '\033[0;32m  You will also need to provide your API Gateway URL in apigatewayclient.js\e[m\n';
