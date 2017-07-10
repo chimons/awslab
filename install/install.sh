@@ -4,6 +4,7 @@ sudo service httpd start
 sudo chkconfig httpd on
 sudo groupadd www
 sudo usermod -a -G www ec2-user
+sudo su ec2-user
 sudo chown -R root:www /var/www
 sudo chmod 2775 /var/www
 find /var/www -type d -exec sudo chmod 2775 {} +
