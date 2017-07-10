@@ -96,6 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <body>
 <form action="" method='post' enctype="multipart/form-data">
 <h3>Upload image file here</h3><br/>
+<p>Uploading to <?php echo $bucket ?> in region <?php echo $s3region ?></p>
 <div>
 <input type='file' name='file'/>
 <input type='submit' value='Upload Image'/>
