@@ -1,7 +1,7 @@
 sudo yum update –y
 sudo yum install -y httpd24 php56
-phpmemory_limit=25M
-sudo sed -i 's/upload_max_filesize = .*/upload_max_filesize = '${phpmemory_limit}'/' /etc/php.ini
+maxsize=25M
+sudo sed -i 's/upload_max_filesize = .*/upload_max_filesize = '${maxsize}'/' /etc/php.ini
 sudo service httpd start
 sudo chkconfig httpd on
 sudo groupadd www
