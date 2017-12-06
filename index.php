@@ -85,8 +85,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $msg = "Please select image file.";
     
 }
+$max_post = (int)(ini_get('post_max_size'));
+$memory_limit = (int)(ini_get('memory_limit'));
+$max_filesize = min($max_post, $memory_limit);
 
-$maxsize = min (ini_get("upload_max_filesize"), ini_get("post_max_size"));
 
 ?>
 <!DOCTYPE html>
@@ -99,7 +101,7 @@ $maxsize = min (ini_get("upload_max_filesize"), ini_get("post_max_size"));
 <form action="" method='post' enctype="multipart/form-data">
 <h3>Upload image file here</h3><br/>
 <p>Uploading to <?php echo $bucket ?> in region <?php echo $s3region ?></p>
-<p>Max size: <?php echo $maxsize ?></p>
+<p>Max size: <?php echo $max_filesize ?></p>
 <div>
 <input type='file' name='file'/>
 <input type='submit' value='Upload Image'/>
