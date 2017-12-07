@@ -100,6 +100,7 @@ $max_filesize = min($max_post, $memory_limit);
 <body>
 <form action="" method='post' enctype="multipart/form-data">
 <h3>Upload image file here</h3><br/>
+<p>Page served from <?php echo(file_get_contents('http://169.254.169.254/latest/meta-data/public-hostname/')); ?></p>
 <p>Uploading to <?php echo $bucket ?> in region <?php echo $s3region ?></p>
 <p>Max size: <?php echo $max_filesize ?></p>
 <div>
