@@ -18,7 +18,7 @@ for (var i = 0;i<data.length;i++){
 	var div = document.createElement('div');
 	var img = document.createElement('img');
 	var p = document.createElement('p');
-	p.innerHTML = 	"<b>Upload date: </b>"+data[i].datetime+ 
+	p.innerHTML = 	"<b>Upload date: </b>"+data[i].eventTime+ 
 					"<br><b>filename :</b> "+data[i].filename+ 
 					"<br><b>URL :</b> <a href='"+data[i].url+"'>"+data[i].url+"</a>";
 	img.src = data[i].url;
