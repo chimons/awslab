@@ -27,7 +27,6 @@ getAjax(api_url, function(data){
 		p.innerHTML = 	"<b>Upload date: </b>"+data[i].eventTime+ 
 						"<br><b>URL :</b> <a href='"+data[i].url+"'>"+data[i].url+"</a>";
 
-
 		var img = document.createElement('img');
 		img.src = data[i].url;
 		img.alt = data[i].filename;
