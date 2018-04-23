@@ -1,0 +1,130 @@
+Added some fashion on HTML index page
+
+# --------------
+# Please enter the commit message for your changes. Everything below
+# this paragraph is ignored, and an empty message aborts the commit.
+# Just close the window to accept your message.
+diff --git a/index.php b/index.php
+index 18f986d..94abeb6 100644
+--- a/index.php
++++ b/index.php
+@@ -20,7 +20,7 @@ require('sdk/aws-autoloader.php');
+ 
+ 
+ 
+-		
++
+ function getExtension($str)
+ {
+     $i = strrpos($str, ".");
+@@ -53,20 +53,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
+     $size = $_FILES['file']['size'];
+     $tmp  = $_FILES['file']['tmp_name'];
+     $ext  = strtolower(getExtension($name));
+-    
++
+     if (strlen($name) > 0) {
+-        
++
+         if (in_array($ext, $valid_formats)) {
+-            
++
+ 				//Instanciate the S3 object from the AWS SDK
+ 				$s3 = new Aws\S3\S3Client([
+ 					'version' => 'latest',
+ 					'region'  => $s3region
+ 				]);
+-				
+-                //Rename the image. 
++
++                //Rename the image.
+                 $actual_image_name = time() . '.' . $ext;
+-				
++
+ 				// Put to S3
+ 				$result = $s3->putObject([
+ 					'Bucket' => $bucket,
+@@ -75,15 +75,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
+ 					'ContentType' => 'image/'.$ext,
+ 					'ACL' => 'public-read'
+ 				]);
+-				
++
+ 				$image_url = $result['ObjectURL'];
+ 
+         } else
+             $msg = "Invalid file, please upload image file.";
+-        
++
+     } else
+         $msg = "Please select image file.";
+-    
++
+ }
+ $max_post = (int)(ini_get('post_max_size'));
+ $memory_limit = (int)(ini_get('memory_limit'));
+@@ -93,29 +93,37 @@ $max_filesize = min($max_post, $memory_limit);
+ ?>
+ <!DOCTYPE html>
+ <html>
+-<head>
+-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+-<title>Wavestone AWS Lab - Upload files to S3</title>
+-</head>
+-<body>
+-<form action="" method='post' enctype="multipart/form-data">
+-<h3>Upload image file here</h3><br/>
+-<p>Page served from <?php echo(file_get_contents('http://169.254.169.254/latest/meta-data/public-hostname/')); ?></p>
+-<p>Uploading to <?php echo $bucket ?> in region <?php echo $s3region ?></p>
+-<p>Max size: <?php echo $max_filesize ?></p>
+-<div>
+-<input type='file' name='file'/>
+-<input type='submit' value='Upload Image'/>
+-</div>
+-</form>
+-<?php
+-if (isset($image_url)){
+-	echo '<h3>Image successfully uploaded to Amazon S3</h3>';
+-	echo '<img src="'.$image_url.'" /><br>';	
+-	echo '<a href="'.$image_url.'">'.$image_url.'</a><br>';
+-}
+-?>
+-
+-<a href="gallery.html">Open gallery</a>
+-</body>
+-</html>
++    <head>
++        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
++        <title>Wavestone AWS Lab - Upload files to S3</title>
++        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
++    </head>
++    <body>
++        <div class="jumbotron">
++            <form action="" method='post' enctype="multipart/form-data">
++                <h1 class="display-4">Welcome to Gallery upload page</h1>
++                <em><p>Page served from <strong><?php echo(file_get_contents('http://169.254.169.254/latest/meta-data/public-hostname/')); ?></p></strong>
++                <p>Uploading to <?php echo $bucket ?> in region <?php echo $s3region ?></p></em>
++                <hr class="my-4">
++                <p>Max size: <?php echo $max_filesize ?></p>
++                <div class="form-group">
++                    <input type="file" name="file"/>
++                    <input type="submit" value="Upload Image" class="btn btn-primary"/>
++                </div>
++            </form>
++
++            <button type="button" class="btn btn-success" href="gallery.html">Open gallery</button>
++            
++            <hr class="my-4">
++
++            <?php
++            if (isset($image_url)){
++                echo '<h3>Image successfully uploaded to Amazon S3</h3>';
++                echo '<img src="'.$image_url.'" /><br>';    
++                echo '<a href="'.$image_url.'">'.$image_url.'</a><br>';
++            }
++            ?>
++
++        </div>
++    </body>
++</html>
+\ No newline at end of file
