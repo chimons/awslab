@@ -112,7 +112,7 @@ $max_filesize = min($max_post, $memory_limit);
                 </div>
             </form>
 
-            <button type="button" class="btn btn-success" href="gallery.html">Open gallery</button>
+	    <a class="btn btn-success" href="gallery.html" role="button">Open Gallery</a>
             
             <hr class="my-4">
 
