@@ -102,7 +102,7 @@ $max_filesize = min($max_post, $memory_limit);
         <div class="jumbotron">
             <form action="" method='post' enctype="multipart/form-data">
                 <h1 class="display-4">Welcome to Gallery upload page</h1>
-                <em><p>Page served from <strong><?php echo(file_get_contents('http://169.254.169.254/latest/meta-data/public-hostname/')); ?></p></strong>
+                <em><p>Page served from <strong><?php echo(file_get_contents('http://169.254.169.254/latest/meta-data/local-hostname/')); ?></p></strong>
                 <p>Uploading to <?php echo $bucket ?> in region <?php echo $s3region ?></p></em>
                 <hr class="my-4">
                 <p>Max size: <?php echo $max_filesize ?></p>
