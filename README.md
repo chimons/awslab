@@ -6,3 +6,4 @@ Paste below command :
 curl https://raw.githubusercontent.com/chimons/awslab/master/install/install.sh | sudo bash
 ```
 
+... And follow instructions `printed at the end of command execution`.
