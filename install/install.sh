@@ -13,9 +13,9 @@ find /var/www -type d -exec sudo chmod 2775 {} +
 find /var/www -type f -exec sudo chmod 0664 {} +
 cd /var/www/html
 wget https://s3.amazonaws.com/awstrainingwavestone/awslab-master.zip
-unzip -q master.zip
+unzip -q awslab-master.zip
 mv awslab-master/* .
-rm master.zip
+rm awslab-master.zip
 rm -R awslab-master/ install/
 printf '\033[0;32m  Installation of the AWS LAB environment completed\e[m\n';
 printf '\033[0;32m  Now, please update the index.php file with your actual S3 Bucket name and region.\e[m\n';
