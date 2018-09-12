@@ -5,6 +5,7 @@ import os
 
 dynamodb = boto3.client('dynamodb')
 AWS_REGION = os.environ['AWS_REGION']
+var_tableName = os.environ['DYNAMODB_TABLE']
 
 def lambda_handler(event, context):
     #print("Received event: " + json.dumps(event, indent=2))
@@ -29,5 +30,5 @@ def lambda_handler(event, context):
             'url': {'S': url },
             'itemType': {'S': 'image'}
         },
-        TableName='vnaTestDynamoDB',
+        TableName = var_tableName,
     )
