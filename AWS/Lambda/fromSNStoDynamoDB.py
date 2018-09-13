@@ -3,8 +3,12 @@ import boto3
 import os
 import botocore
 
+#Create a connection with DynamoDB Service
 dynamodb = boto3.client('dynamodb')
+#Get region of execution from environment variables available by default
 AWS_REGION = os.environ['AWS_REGION']
+#Get DynamoDB Table name from custom environment variable
+# !! DO NOT HARD CODE THIS VALUE !!
 var_tableName = os.environ['DYNAMODB_TABLE']
 
 def lambda_handler(event, context):
@@ -21,7 +25,7 @@ def lambda_handler(event, context):
         #Building the url to the object from retrived information
         url = 'https://' + bucket + 's3-' + AWS_REGION + ".amazonaws.com/" + key
     
-        #Insert item in DynamoDB
+        #Inserting item in DynamoDB
         dynamodb.put_item(
             Item={
                 'filename': {'S': key },
