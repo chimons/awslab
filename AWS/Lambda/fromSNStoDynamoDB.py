@@ -26,7 +26,7 @@ def lambda_handler(event, context):
         url = 'https://' + bucket + 's3-' + AWS_REGION + ".amazonaws.com/" + key
     
         #Inserting item in DynamoDB
-        dynamodb.put_item(
+        response = dynamodb.put_item(
             Item={
                 'filename': {'S': key },
                 'eventTime': {'S': datetime},
@@ -35,5 +35,10 @@ def lambda_handler(event, context):
             },
             TableName = var_tableName,
         )
+        
+        if (response):
+            print("Success! Below the result of what has been inserted in your DynamoDB table " + var_tableName)
+            print(response)
+            
     except botocore.exceptions.ClientError as e:
         print (e)
