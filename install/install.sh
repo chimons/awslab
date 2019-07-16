@@ -1,6 +1,5 @@
 sudo yum update –y
 sudo yum install -y httpd php56
-sudo amazon-linux-extras install -y php7.2
 maxsize=25M
 sudo sed -i 's/upload_max_filesize = .*/upload_max_filesize = '${maxsize}'/' /e$
 sudo service httpd start
