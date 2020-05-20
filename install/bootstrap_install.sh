@@ -34,9 +34,12 @@ unzip -q awslab-master.zip
 mv awslab-master/* .
 rm awslab-master.zip
 rm -R awslab-master/ install/
+
+sed -i "s/'BUCKET_NAME'/\"$S3_NAME\"/g" index.php
+sed -i "s/'S3_REGION'/\"$REGION\"/g" index.php
+sed -i "s,http://amazon-api-gateway-url.com/update-me\!,$API_GATEWAY_URL,g" apigatewayclient.js
+
 printf '\033[0;32m  Installation of the AWS LAB environment completed\e[m\n';
-printf '\033[0;32m  Now, please update the index.php file with your actual S3 Bucket name and region.\e[m\n';
-printf '\033[0;32m  You will also need to provide your API Gateway URL in apigatewayclient.js\e[m\n';
-printf '\033[0;32m Then you will be able to access your application thru your browser at : \033[1;32m';
+printf '\033[0;32m You should be able to access your application thru your browser at : \033[1;32m';
 curl -s http://169.254.169.254/latest/meta-data/public-hostname
 printf '\e[m\n\n'
