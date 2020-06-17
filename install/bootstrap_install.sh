@@ -1,6 +1,6 @@
 mkdir -p ~/.aws
 touch ~/.aws/config
-REGION="eu-west-1"
+REGION="eu-central-1"
 if [ ! -f ~/.aws/config ]
 then
     echo '[default]' >> ~/.aws/config
