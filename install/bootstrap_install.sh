@@ -1,19 +1,12 @@
+REGION="`wget -qO- http://instance-data/latest/meta-data/placement/availability-zone | sed -e 's:\([0-9][0-9]*\)[a-z]*\$:\\1:'`"
+
 mkdir -p ~/.aws
 touch ~/.aws/config
-REGION="eu-central-1"
-if [ ! -f ~/.aws/config ]
-then
-    echo '[default]' >> ~/.aws/config
-    echo "region = $REGION" >> ~/.aws/config
-else
-    echo "~/.aws/config already exists; make sure the region is correct"
-fi
+echo '[default]' >> ~/.aws/config
+echo "region = $REGION" >> ~/.aws/config
 
-INSTANCE_ID=`curl http://169.254.169.254/latest/meta-data/instance-id`
-S3_NAME=`aws ec2 describe-tags --filters "Name=resource-id,Values=${INSTANCE_ID}" | grep -2 S3_NAME | grep Value | tr -d ' ' | cut -f2 -d: | tr -d '"' | tr -d ','`
-API_GATEWAY_URL=`aws ec2 describe-tags --filters "Name=resource-id,Values=${INSTANCE_ID}" | grep -2 API_GATEWAY_URL | grep Value | tr -d ' ' | cut -f2 -d: | tr -d '"' | tr -d ','`
-echo "S3 name: $S3_NAME"
-echo "API gateway URL: $API_GATEWAY_URL"
+
+
 
 sudo yum update –y
 sudo yum install -y httpd24 php56
@@ -35,7 +28,18 @@ mv awslab-master/* .
 rm awslab-master.zip
 rm -R awslab-master/ install/
 
-sed -i "s/'BUCKET_NAME'/\"$S3_NAME\"/g" index.php
+
+
+INSTANCE_ID="`wget -qO- http://instance-data/latest/meta-data/instance-id`"
+
+S3_NAME="`aws ec2 describe-tags --filters "Name=resource-id,Values=$INSTANCE_ID" "Name=key,Values=S3_NAME" --region $REGION --output=text | cut -f5`"
+
+API_GATEWAY_URL="`aws ec2 describe-tags --filters "Name=resource-id,Values=$INSTANCE_ID" "Name=key,Values=API_GATEWAY_URL" --region $REGION --output=text | cut -f5`"
+
+echo "S3 name: $S3_NAME"
+echo "API gateway URL: $API_GATEWAY_URL"
+
+sed -i "s/'BUCKET_NAME'/\"$S3_NAME\"/g" /var/www/html/index.php
 sed -i "s/'S3_REGION'/\"$REGION\"/g" index.php
 sed -i "s,http://amazon-api-gateway-url.com/update-me\!,$API_GATEWAY_URL,g" apigatewayclient.js
 
