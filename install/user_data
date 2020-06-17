@@ -5,12 +5,6 @@ BUCKET_NAME="XXXXXXX"
 API_GATEWAY_URL="XXXXXXXXXXXX"
 
 
-mkdir -p ~/.aws
-touch ~/.aws/config
-echo '[default]' >> ~/.aws/config
-echo "region = $REGION" >> ~/.aws/config
-
-
 sudo yum update –y
 sudo yum install -y httpd24 php56
 maxsize=25M
@@ -31,14 +25,6 @@ mv awslab-master/* .
 rm awslab-master.zip
 rm -R awslab-master/ install/
 
-echo "S3 name: $BUCKET_NAME"
-echo "API gateway URL: $API_GATEWAY_URL"
-
 sed -i "s/'BUCKET_NAME'/\"$BUCKET_NAME\"/g" /var/www/html/index.php
 sed -i "s/'S3_REGION'/\"$REGION\"/g" index.php
 sed -i "s,http://amazon-api-gateway-url.com/update-me\!,$API_GATEWAY_URL,g" apigatewayclient.js
-
-printf '\033[0;32m  Installation of the AWS LAB environment completed\e[m\n';
-printf '\033[0;32m You should be able to access your application thru your browser at : \033[1;32m';
-curl -s http://169.254.169.254/latest/meta-data/public-hostname
-printf '\e[m\n\n'
