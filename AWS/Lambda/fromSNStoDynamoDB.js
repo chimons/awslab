@@ -12,7 +12,7 @@ exports.handler = function(event, context) {
     var bucket = s3.bucket.name;
     var key = s3.object.key;
     var size = s3.object.size;
-    var url = 'https://'+bucket+'.s3-'+AWS_REGION+'.amazonaws.com/'+key;
+    var url = 'https://'+bucket+'.s3.'+AWS_REGION+'.amazonaws.com/'+key;
     
     dynamodb.putItem({
         TableName: tableName,
