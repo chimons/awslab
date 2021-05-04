@@ -15,7 +15,7 @@ sudo chmod 2775 /var/www
 find /var/www -type d -exec sudo chmod 2775 {} +
 find /var/www -type f -exec sudo chmod 0664 {} +
 cd /var/www/html
-wget https://s3.amazonaws.com/awstrainingwavestone/awslab-master.zip
+wget https://github.com/chimons/awslab/archive/refs/heads/master.zip
 unzip -q awslab-master.zip
 mv awslab-master/* .
 rm awslab-master.zip
