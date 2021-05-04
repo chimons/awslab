@@ -1,4 +1,4 @@
-var api_url = "http://amazon-api-gateway-url.com/update-me!";
+var api_url = "API-GATEWAY-URL";
 	
 	
 function getAjax(url, success) {
